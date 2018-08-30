@@ -1,26 +1,81 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Signup</ion-title>
+    <ion-title>Registrar</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
 
-  <form [formGroup]="formGroup" (ngSubmit)="signupUser(); $event.preventDefault();">
+  <form (ngSubmit)="signupUser(); $event.preventDefault();">
 
     <ion-item>
       <ion-label stacked>Nome*</ion-label>
-      <ion-input formControlName="nome" type="text"></ion-input>
+      <ion-input name="nome" type="text"></ion-input>
     </ion-item>
-    <p class="danger" *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors?.required" margin-left >Valor Inválido</p>
-
+    
     <ion-item>
         <ion-label stacked>Email*</ion-label>
-        <ion-input formControlName="email" type="text"></ion-input>
+        <ion-input name="email" type="text"></ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Senha*</ion-label>
+      <ion-input name="password" type="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Confirmação Senha*</ion-label>
+      <ion-input name="confirmationPassword" type="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>CEP*</ion-label>
+      <ion-input name="postalCode" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Endereço*</ion-label>
+      <ion-input name="addressName" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Número*</ion-label>
+      <ion-input name="addressNumber" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Bairro*</ion-label>
+      <ion-input name="neignborhood" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Complemento</ion-label>
+      <ion-input name="complement" type="text"></ion-input>
+    </ion-item>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Estado</ion-label>
+        <ion-select name="state">
+          <ion-option value="CE">Ceará</ion-option>
+          <ion-option value="RN">Rio Grande do Norte</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Cidade</ion-label>
+        <ion-select name="city">
+          <ion-option value="CE">Fortaleza</ion-option>
+          <ion-option value="RN">Natal</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <button ion-button block type="submit">Registrar</button>
 
   </form>
 

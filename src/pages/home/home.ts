@@ -26,4 +26,8 @@ export class HomePage {
     this.navCtrl.setRoot('CategoryPage')
   }
 
+  signup() {
+    this.navCtrl.push('SignupPage')
+  }
+
 }
