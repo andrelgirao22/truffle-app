@@ -8,57 +8,57 @@
 
 <ion-content padding>
 
-  <form (ngSubmit)="signupUser(); $event.preventDefault();">
+  <form [formGroup]="formGroup" (ngSubmit)="signupUser(); $event.preventDefault();">
 
     <ion-item>
       <ion-label stacked>Nome*</ion-label>
-      <ion-input name="nome" type="text"></ion-input>
+      <ion-input formControlName="name" type="text"></ion-input>
     </ion-item>
     
     <ion-item>
         <ion-label stacked>Email*</ion-label>
-        <ion-input name="email" type="text"></ion-input>
+        <ion-input formControlName="email" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Senha*</ion-label>
-      <ion-input name="password" type="password"></ion-input>
+      <ion-input formControlName="password" type="password"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Confirmação Senha*</ion-label>
-      <ion-input name="confirmationPassword" type="password"></ion-input>
+      <ion-input formControlName="passwordConfirmation" type="password"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>CEP*</ion-label>
-      <ion-input name="postalCode" type="number"></ion-input>
+      <ion-input formControlName="postalCode" type="number"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Endereço*</ion-label>
-      <ion-input name="addressName" type="text"></ion-input>
+      <ion-input formControlName="addressName" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Número*</ion-label>
-      <ion-input name="addressNumber" type="number"></ion-input>
+      <ion-input formControlName="addressNumber" type="number"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Bairro*</ion-label>
-      <ion-input name="neignborhood" type="text"></ion-input>
+      <ion-input formControlName="neignborhood" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Complemento</ion-label>
-      <ion-input name="complement" type="text"></ion-input>
+      <ion-input formControlName="complement" type="text"></ion-input>
     </ion-item>
 
     <ion-list>
       <ion-item>
         <ion-label>Estado</ion-label>
-        <ion-select name="state">
+        <ion-select formControlName="state">
           <ion-option value="CE">Ceará</ion-option>
           <ion-option value="RN">Rio Grande do Norte</ion-option>
         </ion-select>
@@ -68,7 +68,7 @@
     <ion-list>
       <ion-item>
         <ion-label>Cidade</ion-label>
-        <ion-select name="city">
+        <ion-select formControlName="city">
           <ion-option value="CE">Fortaleza</ion-option>
           <ion-option value="RN">Natal</ion-option>
         </ion-select>
