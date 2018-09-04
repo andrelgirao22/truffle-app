@@ -44,7 +44,9 @@ export class SignupPage {
   signupUser() {
     this.clientService.insert(this.formGroup.value).subscribe(res => {
       this.showOk()
-    }, error => {})
+    }, error => {
+      console.log(error)
+    })
   }
 
   showOk() {
