@@ -58,9 +58,8 @@
     <ion-list>
       <ion-item>
         <ion-label>Estado</ion-label>
-        <ion-select formControlName="state">
-          <ion-option value="CE">Ceará</ion-option>
-          <ion-option value="RN">Rio Grande do Norte</ion-option>
+        <ion-select formControlName="state" (ionChange)="updateCidades()">
+          <ion-option *ngFor="let state of estados; first as f" [value]="state.ibgeCode" [selected]="f">{{ state.name }}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
@@ -69,8 +68,7 @@
       <ion-item>
         <ion-label>Cidade</ion-label>
         <ion-select formControlName="city">
-          <ion-option value="CE">Fortaleza</ion-option>
-          <ion-option value="RN">Natal</ion-option>
+          <ion-option *ngFor="let city of cidades" [value]="city.id">{{city.nome}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
