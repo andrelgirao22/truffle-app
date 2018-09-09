@@ -32,8 +32,8 @@ export class HomePage {
 
   ionViewDidEnter() {
     this.authService.refreshToken().subscribe(res => {
-      console.log(res)
       if(res.body.access_token) {
+        console.log('refresh')
         this.authService.successfullLogin(res.body)
         this.navCtrl.setRoot('CategoryPage')
       }

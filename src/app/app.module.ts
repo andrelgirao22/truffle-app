@@ -15,6 +15,7 @@ import { ClientService } from '../services/client.service';
 import { StateService } from '../services/state.service';
 import { AuthService } from '../services/auth.service';
 import { CategotyService } from '../services/domain/category.service';
+import { AuthInterceptor } from '../interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { CategotyService } from '../services/domain/category.service';
     ClientService,
     CategotyService,
     StateService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
