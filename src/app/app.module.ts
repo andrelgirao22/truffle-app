@@ -12,6 +12,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ClientService } from '../services/client.service';
 import { StateService } from '../services/state.service';
 import { AuthService } from '../services/auth.service';
+import { CategotyService } from '../services/domain/category.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AuthService } from '../services/auth.service';
     StorageService,
     PostalCodeService,
     ClientService,
+    CategotyService,
     StateService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

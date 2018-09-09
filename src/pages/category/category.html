@@ -10,5 +10,24 @@
 </ion-header>
 
 <ion-content padding>
-  <p>Categorias</p>
+  
+  <ion-list>
+    <!--ion-item *ngFor="let category of categories">
+      <ion-avatar item-start>
+        <img [src]="category.imageUrl">
+      </ion-avatar>
+      <h2>{{ category.name | uppercase }}</h2>
+    </ion-item-->
+
+    <ion-item *ngFor="let category of categories">
+      <ion-thumbnail item-start>
+        <img [src]="category.imageUrl">
+      </ion-thumbnail>
+      <h2>{{ category.name | uppercase }}</h2>
+      <button ion-button clear item-end>Ver</button>
+    </ion-item>
+
+  </ion-list>
+
+
 </ion-content>
