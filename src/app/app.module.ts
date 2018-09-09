@@ -1,9 +1,11 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorInterceptor } from './../interceptors/error-interceptor';
 import { PostalCodeService } from './../services/postal_code.service';
 import { StorageService } from './../services/storage.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import {HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http'
 
 import { MyApp } from './app.component';
 
@@ -36,6 +38,7 @@ import { CategotyService } from '../services/domain/category.service';
     ClientService,
     CategotyService,
     StateService,
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

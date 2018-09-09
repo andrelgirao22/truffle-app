@@ -28,6 +28,16 @@ export class AuthService {
             })
     }
 
+    refreshToken() : Observable<any> {
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/auth/refresh`, 
+            {},
+            {
+                observe: 'response',
+                responseType: 'json'
+            })
+    }
+
     successfullLogin(responseBody) {
         let localUser: LocalUser = {
             token: responseBody.access_token,
