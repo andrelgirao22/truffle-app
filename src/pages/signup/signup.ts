@@ -1,3 +1,4 @@
+import { PostalCodeService } from './../../services/postal_code.service';
 import { CidadeDto } from './../../model/cidade.dto';
 import { EstadoDto } from './../../model/estado.dto';
 import { ClientService } from './../../services/client.service';
@@ -24,7 +25,8 @@ export class SignupPage {
     public clientService: ClientService,
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
-    public stateService: StateService) {
+    public stateService: StateService,
+    public postalCodeService: PostalCodeService) {
 
       this.formGroup = this.formBuilder.group({
         name: ['Andre Girao', [Validators.required, Validators.minLength(5)]],
@@ -36,8 +38,8 @@ export class SignupPage {
         addressNumber:['2265', Validators.required],
         neignborhood:['Parque Sao Jose', Validators.required],
         complement:['Ap 201 Bl F'],
-        state:[''],
-        city:[''],
+        state:['', Validators.required],
+        city:['', Validators.required],
       })
     }
 
@@ -56,12 +58,28 @@ export class SignupPage {
     }, errro => {})
   }
 
+  updateAddress() {
+    let postalCode = this.formGroup.value.postalCode
+    this.postalCodeService.getAddressFromPostalCode(postalCode).subscribe(res => {
+      if(res) {
+        this.setAddress(res)
+      }
+      
+    }, error => {})
+  }
+
   signupUser() {
     this.clientService.insert(this.formGroup.value).subscribe(res => {
       this.showOk()
     }, error => {
       console.log(error)
     })
+  }
+
+  setAddress(address) {
+    this.formGroup.controls.addressName.setValue(address.logradouro)
+    this.formGroup.controls.neignborhood.setValue(address.bairro)
+    this.formGroup.controls.state.setValue(address.localidade)
   }
 
   showOk() {

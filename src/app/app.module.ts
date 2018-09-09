@@ -1,3 +1,4 @@
+import { PostalCodeService } from './../services/postal_code.service';
 import { StorageService } from './../services/storage.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -30,6 +31,7 @@ import { AuthService } from '../services/auth.service';
     SplashScreen,
     AuthService,
     StorageService,
+    PostalCodeService,
     ClientService,
     StateService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
