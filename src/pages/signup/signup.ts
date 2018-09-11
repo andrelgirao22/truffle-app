@@ -4,7 +4,7 @@ import { EstadoDto } from './../../model/estado.dto';
 import { ClientService } from './../../services/client.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { StateService } from '../../services/state.service';
 
 @IonicPage()
@@ -40,8 +40,22 @@ export class SignupPage {
         complement:['Ap 201 Bl F'],
         state:['', Validators.required],
         city:['', Validators.required],
-      })
+      }, {validator: SignupPage.equalsTo})
+  }
+
+  static equalsTo(group: AbstractControl): {[key:string]:boolean} {
+    const password = group.get('password')
+    const passwordConfirmation = group.get('passwordConfirmation')
+    if(!password || !passwordConfirmation) {
+      return undefined
     }
+
+    if(password.value !== passwordConfirmation.value) {
+      return {passwordNotMatch: true}
+    } 
+
+    return undefined
+  }
 
   ionViewDidLoad() {
     this.stateService.getStates().subscribe(res => {
@@ -77,9 +91,11 @@ export class SignupPage {
   }
 
   setAddress(address) {
+    console.log('adress', address)
     this.formGroup.controls.addressName.setValue(address.logradouro)
     this.formGroup.controls.neignborhood.setValue(address.bairro)
-    this.formGroup.controls.state.setValue(address.localidade)
+    this.formGroup.controls.state.setValue(address.uf)
+    this.formGroup.controls.city.setValue(address.localidade)
   }
 
   showOk() {

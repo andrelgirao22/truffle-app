@@ -24,6 +24,7 @@
       <ion-label stacked>Senha*</ion-label>
       <ion-input formControlName="password" type="password"></ion-input>
     </ion-item>
+    <ion-label color="danger" margin-left *ngIf="formGroup.hasError('passwordNotMatch')">Senhas não conferem</ion-label>
     <p *ngIf="formGroup.controls.password.dirty && formGroup.controls.password.errors" margin-left>Valor Inválido</p>
     <ion-item>
       <ion-label stacked>Confirmação Senha*</ion-label>
@@ -59,7 +60,7 @@
       <ion-item>
         <ion-label>Estado*</ion-label>
         <ion-select formControlName="state" (ionChange)="updateCidades()">
-          <ion-option *ngFor="let state of estados; first as f" [value]="state.ibgeCode" [selected]="f">{{ state.name }}</ion-option>
+          <ion-option *ngFor="let state of estados; first as f" [value]="state.initial">{{ state.name }}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
@@ -68,7 +69,7 @@
       <ion-item>
         <ion-label>Cidade*</ion-label>
         <ion-select formControlName="city">
-          <ion-option *ngFor="let city of cidades" [value]="city.id">{{city.nome}}</ion-option>
+          <ion-option *ngFor="let city of cidades" [value]="city.nome">{{city.nome}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
