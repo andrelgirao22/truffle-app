@@ -1,3 +1,4 @@
+import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -15,11 +16,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  email: string
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public storageService: StorageService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+    let localUser = this.storageService.getLocalUser()
+    if(localUser && localUser.email) {
+      this.email = localUser.email
+    }
   }
 
 }
