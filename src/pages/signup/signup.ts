@@ -1,11 +1,11 @@
 import { PostalCodeService } from './../../services/postal_code.service';
 import { CidadeDto } from './../../model/cidade.dto';
 import { EstadoDto } from './../../model/estado.dto';
-import { ClientService } from './../../services/client.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { StateService } from '../../services/state.service';
+import { AccountService } from '../../services/domain/account.service';
 
 @IonicPage()
 @Component({
@@ -22,7 +22,7 @@ export class SignupPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public clientService: ClientService,
+    public accountService: AccountService,
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
     public stateService: StateService,
@@ -83,7 +83,7 @@ export class SignupPage {
   }
 
   signupUser() {
-    this.clientService.insert(this.formGroup.value).subscribe(res => {
+    this.accountService.insert(this.formGroup.value).subscribe(res => {
       this.showOk()
     }, error => {
       console.log(error)

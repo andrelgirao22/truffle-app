@@ -1,3 +1,4 @@
+import { AccountService } from './../services/domain/account.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './../interceptors/error-interceptor';
 import { PostalCodeService } from './../services/postal_code.service';
@@ -11,7 +12,6 @@ import { MyApp } from './app.component';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { ClientService } from '../services/client.service';
 import { StateService } from '../services/state.service';
 import { AuthService } from '../services/auth.service';
 import { CategotyService } from '../services/domain/category.service';
@@ -36,7 +36,7 @@ import { AuthInterceptor } from '../interceptors/auth-interceptor';
     AuthService,
     StorageService,
     PostalCodeService,
-    ClientService,
+    AccountService,
     CategotyService,
     StateService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

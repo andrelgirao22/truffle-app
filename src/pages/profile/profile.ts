@@ -1,3 +1,5 @@
+import { AccountService } from './../../services/domain/account.service';
+import { AccountDTO } from './../../model/account.dto';
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -16,18 +18,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProfilePage {
 
-  email: string
+  account: AccountDTO
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public storageService: StorageService) {
+    public storageService: StorageService,
+    public accountService: AccountService) {
   }
 
   ionViewDidLoad() {
     let localUser = this.storageService.getLocalUser()
     if(localUser && localUser.email) {
-      this.email = localUser.email
+      this.accountService.findByEmail(localUser.email).subscribe(res => {
+        this.account = res
+        //buscar imagem
+      }, error => {})
     }
   }
 
