@@ -4,7 +4,6 @@ import { Injectable } from "@angular/core";
 export class ImageUtilService {
 
     dataUriToBlob(dataUri) {
-        console.log('data', dataUri)
         var byteString = atob(dataUri.split(',')[1])
         var mimeString = dataUri.split(',')[0].split(':')[1].split(';')[0]
         var ab = new ArrayBuffer(byteString.length)
