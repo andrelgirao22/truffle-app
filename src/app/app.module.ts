@@ -1,3 +1,4 @@
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AccountService } from './../services/domain/account.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './../interceptors/error-interceptor';
@@ -16,6 +17,7 @@ import { StateService } from '../services/state.service';
 import { AuthService } from '../services/auth.service';
 import { CategotyService } from '../services/domain/category.service';
 import { AuthInterceptor } from '../interceptors/auth-interceptor';
+import { ImageUtilService } from '../services/image-util.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { AuthInterceptor } from '../interceptors/auth-interceptor';
     AccountService,
     CategotyService,
     StateService,
+    Camera,
+    ImageUtilService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: ErrorHandler, useClass: IonicErrorHandler}
