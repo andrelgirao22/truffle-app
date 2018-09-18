@@ -1,4 +1,5 @@
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ItemService } from './../services/domain/item.service';
+import { Camera } from '@ionic-native/camera';
 import { AccountService } from './../services/domain/account.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './../interceptors/error-interceptor';
@@ -6,7 +7,7 @@ import { PostalCodeService } from './../services/postal_code.service';
 import { StorageService } from './../services/storage.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, Item } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http'
 
 import { MyApp } from './app.component';
@@ -40,6 +41,7 @@ import { ImageUtilService } from '../services/image-util.service';
     PostalCodeService,
     AccountService,
     CategotyService,
+    ItemService,
     StateService,
     Camera,
     ImageUtilService,

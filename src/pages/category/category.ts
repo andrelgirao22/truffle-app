@@ -29,7 +29,7 @@ export class CategoryPage {
 
   gotToItem(categoryId: string) {
     console.log('category id', categoryId)
-    this.navCtrl.push('ItemPage')
+    this.navCtrl.push('ItemPage', {categoryId: categoryId})
   }
 
 }
