@@ -30,7 +30,7 @@ export class ItemPage {
   }
 
   showDetail(itemId: string) {
-
+    this.navCtrl.push("ItemDetailPage", {itemId: itemId})
   }
 
 }
