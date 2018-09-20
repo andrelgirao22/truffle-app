@@ -1,12 +1,7 @@
+import { ItemDTO } from './../../model/item.dto';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ItemDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ItemService } from '../../services/domain/item.service';
 
 @IonicPage()
 @Component({
@@ -15,11 +10,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ItemDetailPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  item: ItemDTO
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public itemService: ItemService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ItemDetailPage');
+    this.loadData()
+  }
+
+  loadData() {
+    let itemId = this.navParams.get("itemId")
+    this.itemService.getItem(itemId).subscribe(res => {
+      console.log(res)
+      this.item = res as ItemDTO
+    }, error => {})
   }
 
 }

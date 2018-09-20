@@ -11,4 +11,8 @@ export class ItemService {
     getItems(categoryId: string): Observable<any> {
         return this.httpClient.get(`${API_CONFIG.baseUrl}/item/category/${categoryId}`)
     }
+
+    getItem(itemId: string) {
+        return this.httpClient.get(`${API_CONFIG.baseUrl}/item/${itemId}`)
+    }
  }
