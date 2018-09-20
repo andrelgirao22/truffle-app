@@ -1,3 +1,4 @@
+import { CartService } from './../services/cart.service';
 import { ItemService } from './../services/domain/item.service';
 import { Camera } from '@ionic-native/camera';
 import { AccountService } from './../services/domain/account.service';
@@ -43,6 +44,7 @@ import { ImageUtilService } from '../services/image-util.service';
     CategotyService,
     ItemService,
     StateService,
+    CartService,
     Camera,
     ImageUtilService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
