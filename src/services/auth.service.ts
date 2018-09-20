@@ -1,3 +1,4 @@
+import { CartService } from './cart.service';
 import { LocalUser } from './../model/local_user';
 import { StorageService } from './storage.service';
 import { Observable } from 'rxjs/Observable';
@@ -15,7 +16,8 @@ export class AuthService {
 
     constructor(
         private http: HttpClient,
-        private storageService: StorageService
+        private storageService: StorageService,
+        private cartService: CartService
         ) {}
 
     authenticate(credential: CredentiaisDTO): Observable<any> {
@@ -45,6 +47,7 @@ export class AuthService {
             account: responseBody.account
         }
         this.storageService.setLocalUser(localUser);
+        this.cartService.createOrClearCart()
     }
 
     logout() {

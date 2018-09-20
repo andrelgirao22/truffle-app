@@ -1,3 +1,4 @@
+import { CartService } from './../../services/cart.service';
 import { ItemDTO } from './../../model/item.dto';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -15,7 +16,8 @@ export class ItemDetailPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public itemService: ItemService) {
+    public itemService: ItemService,
+    public cartService: CartService) {
   }
 
   ionViewDidLoad() {
@@ -28,6 +30,11 @@ export class ItemDetailPage {
       console.log(res)
       this.item = res as ItemDTO
     }, error => {})
+  }
+
+  addToCart(item: ItemDTO) {
+    this.cartService.addItem(item)
+    this.navCtrl.setRoot("CartPage")
   }
 
 }
