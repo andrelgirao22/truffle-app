@@ -1,3 +1,4 @@
+import { AccountDTO } from './../../model/account.dto';
 import { PostalCodeService } from './../../services/postal_code.service';
 import { CidadeDto } from './../../model/cidade.dto';
 import { EstadoDto } from './../../model/estado.dto';
@@ -15,6 +16,7 @@ import { AccountService } from '../../services/domain/account.service';
 export class SignupPage {
 
   formGroup: FormGroup
+  formGroupAddress: FormGroup
 
   estados: EstadoDto[] = []
   cidades: CidadeDto[] = []
@@ -28,18 +30,22 @@ export class SignupPage {
     public stateService: StateService,
     public postalCodeService: PostalCodeService) {
 
+      this.formGroupAddress = this.formBuilder.group({
+          postalCode: ['60730285', Validators.required],
+          addressName: ['Rua Eca de Queiroz', Validators.required],
+          addressNumber:['2265', Validators.required],
+          neighborhood:['Parque Sao Jose', Validators.required],
+          complement:['Ap 201 Bl F'],
+          state:['', Validators.required],
+          city:['', Validators.required]
+      }) 
+
       this.formGroup = this.formBuilder.group({
         name: ['Andre Girao', [Validators.required, Validators.minLength(5)]],
         email: ['andrelgirao29@gmail.com', [Validators.required, Validators.email]],
         password: ['', Validators.required],
         passwordConfirmation: ['', Validators.required],
-        postalCode: ['60730285', Validators.required],
-        addressName: ['Rua Eca de Queiroz', Validators.required],
-        addressNumber:['2265', Validators.required],
-        neignborhood:['Parque Sao Jose', Validators.required],
-        complement:['Ap 201 Bl F'],
-        state:['', Validators.required],
-        city:['', Validators.required],
+        address: this.formGroupAddress
       }, {validator: SignupPage.equalsTo})
   }
 
@@ -60,20 +66,20 @@ export class SignupPage {
   ionViewDidLoad() {
     this.stateService.getStates().subscribe(res => {
       this.estados = res
-      this.formGroup.controls.state.setValue(this.estados[0].ibgeCode)
+      this.formGroupAddress.controls.state.setValue(this.estados[0].ibgeCode)
       this.updateCidades()
     }, error => {})
   }
 
   updateCidades() {
-    let estado = this.formGroup.value.state
+    let estado = this.formGroupAddress.value.state
     this.stateService.getCitiesFromState(estado).subscribe(res => {
       this.cidades = res
     }, errro => {})
   }
 
   updateAddress() {
-    let postalCode = this.formGroup.value.postalCode
+    let postalCode = this.formGroupAddress.value.postalCode
     this.postalCodeService.getAddressFromPostalCode(postalCode).subscribe(res => {
       if(res) {
         this.setAddress(res)
@@ -83,7 +89,13 @@ export class SignupPage {
   }
 
   signupUser() {
-    this.accountService.insert(this.formGroup.value).subscribe(res => {
+
+    let address = this.formGroupAddress.value
+    let account = this.formGroup.value
+    console.log('account', account)
+    account.address = address
+
+    this.accountService.insert(account).subscribe(res => {
       this.showOk()
     }, error => {
       console.log(error)
@@ -92,10 +104,10 @@ export class SignupPage {
 
   setAddress(address) {
     console.log('adress', address)
-    this.formGroup.controls.addressName.setValue(address.logradouro)
-    this.formGroup.controls.neignborhood.setValue(address.bairro)
-    this.formGroup.controls.state.setValue(address.uf)
-    this.formGroup.controls.city.setValue(address.localidade)
+    this.formGroupAddress.controls.addressName.setValue(address.logradouro)
+    this.formGroupAddress.controls.neighborhood.setValue(address.bairro)
+    this.formGroupAddress.controls.state.setValue(address.uf)
+    this.formGroupAddress.controls.city.setValue(address.localidade)
   }
 
   showOk() {

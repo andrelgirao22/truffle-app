@@ -31,51 +31,55 @@
       <ion-input formControlName="passwordConfirmation" type="password"></ion-input>
     </ion-item>
     <p *ngIf="formGroup.controls.passwordConfirmation.dirty && formGroup.controls.passwordConfirmation.errors" margin-left>Valor Inválido</p>
-    <ion-item>
-      <ion-label stacked>CEP*</ion-label>
-      <ion-input formControlName="postalCode" type="number" (ionBlur)="updateAddress()"></ion-input>
-    </ion-item>
-    <p *ngIf="formGroup.controls.postalCode.dirty && formGroup.controls.postalCode.errors" margin-left>Valor Inválido</p>
-    <ion-item>
-      <ion-label stacked>Endereço*</ion-label>
-      <ion-input formControlName="addressName" type="text"></ion-input>
-    </ion-item>
-    <p *ngIf="formGroup.controls.addressName.dirty && formGroup.controls.addressName.errors" margin-left>Valor Inválido</p>
-    <ion-item>
-      <ion-label stacked>Número*</ion-label>
-      <ion-input formControlName="addressNumber" type="number"></ion-input>
-    </ion-item>
-    <p *ngIf="formGroup.controls.addressNumber.dirty && formGroup.controls.addressNumber.errors" margin-left>Valor Inválido</p>
-    <ion-item>
-      <ion-label stacked>Bairro*</ion-label>
-      <ion-input formControlName="neignborhood" type="text"></ion-input>
-    </ion-item>
-    <p *ngIf="formGroup.controls.neignborhood.dirty && formGroup.controls.neignborhood.errors" margin-left>Valor Inválido</p>
-    <ion-item>
-      <ion-label stacked>Complemento</ion-label>
-      <ion-input formControlName="complement" type="text"></ion-input>
-    </ion-item>
+   
+    <div [formGroup]="formGroupAddress">
 
-    <ion-list>
       <ion-item>
-        <ion-label>Estado*</ion-label>
-        <ion-select formControlName="state" (ionChange)="updateCidades()">
-          <ion-option *ngFor="let state of estados; first as f" [value]="state.initial">{{ state.name }}</ion-option>
-        </ion-select>
+        <ion-label stacked>CEP*</ion-label>
+        <ion-input formControlName="postalCode" type="number" (ionBlur)="updateAddress()"></ion-input>
       </ion-item>
-    </ion-list>
-    <p *ngIf="formGroup.controls.state.dirty && formGroup.controls.state.errors" margin-left>Valor Inválido</p>
-    <ion-list>
+      <p *ngIf="formGroupAddress.controls.postalCode.dirty && formGroupAddress.controls.postalCode.errors" margin-left>Valor Inválido</p>
       <ion-item>
-        <ion-label>Cidade*</ion-label>
-        <ion-select formControlName="city">
-          <ion-option *ngFor="let city of cidades" [value]="city.nome">{{city.nome}}</ion-option>
-        </ion-select>
+        <ion-label stacked>Endereço*</ion-label>
+        <ion-input formControlName="addressName" type="text"></ion-input>
       </ion-item>
-    </ion-list>
-    <p *ngIf="formGroup.controls.city.dirty && formGroup.controls.city.errors" margin-left>Valor Inválido</p>
+      <p *ngIf="formGroupAddress.controls.addressName.dirty && formGroupAddress.controls.addressName.errors" margin-left>Valor Inválido</p>
+      <ion-item>
+        <ion-label stacked>Número*</ion-label>
+        <ion-input formControlName="addressNumber" type="number"></ion-input>
+      </ion-item>
+      <p *ngIf="formGroupAddress.controls.addressNumber.dirty && formGroupAddress.controls.addressNumber.errors" margin-left>Valor Inválido</p>
+      <ion-item>
+        <ion-label stacked>Bairro*</ion-label>
+        <ion-input formControlName="neighborhood" type="text"></ion-input>
+      </ion-item>
+      <p *ngIf="formGroupAddress.controls.neighborhood.dirty && formGroupAddress.controls.neighborhood.errors" margin-left>Valor Inválido</p>
+      <ion-item>
+        <ion-label stacked>Complemento</ion-label>
+        <ion-input formControlName="complement" type="text"></ion-input>
+      </ion-item>
+  
+      <ion-list>
+        <ion-item>
+          <ion-label>Estado*</ion-label>
+          <ion-select formControlName="state" (ionChange)="updateCidades()">
+            <ion-option *ngFor="let state of estados; first as f" [value]="state.initial">{{ state.name }}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <p *ngIf="formGroupAddress.controls.state.dirty && formGroupAddress.controls.state.errors" margin-left>Valor Inválido</p>
+      <ion-list>
+        <ion-item>
+          <ion-label>Cidade*</ion-label>
+          <ion-select formControlName="city">
+            <ion-option *ngFor="let city of cidades" [value]="city.nome">{{city.nome}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <p *ngIf="formGroupAddress.controls.city.dirty && formGroupAddress.controls.city.errors" margin-left>Valor Inválido</p>
+    </div>
     <button ion-button block type="submit" [disabled]="formGroup.invalid">Registrar</button>
-
+    {{ formGroup.value | json }}
   </form>
 
 </ion-content>
