@@ -45,8 +45,8 @@ export class AccountService {
             })
     }
 
-    findByEmail(email: string) : Observable<AccountDTO> {
-        return this.httpClient.get<AccountDTO>(`${this.url}/${email}`)
+    findByEmail(email: string)  {
+        return this.httpClient.get(`${this.url}/${email}`)
     }
 
 }

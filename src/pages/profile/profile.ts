@@ -38,7 +38,7 @@ export class ProfilePage {
     let localUser = this.storageService.getLocalUser()
     if(localUser && localUser.email) {
       this.accountService.findByEmail(localUser.email).subscribe(res => {
-        this.account = res
+        this.account = res as AccountDTO
         this.getImageIfExist()
         //this.profileImage = this.account.imageUrl || 'assets/imgs/avatar-blank.png'
       }, error => {})
